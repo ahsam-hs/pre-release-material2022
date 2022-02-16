@@ -28,8 +28,8 @@ family_ticket_choice = 'n'
 group_ticket_choice = 'n'
 
 # Ticket prices to be shown saved as a string
-one_day_prices = "One-day ticket prices:\n Adult\t$20\n Child\t$12\n Senior\t$16\n Family ticket\t$60\n Group ticket\t$15\n"
-two_day_prices = "Two-day ticket prices:\n Adult\t$30\n Child\t$18\n Senior\t$24\n Family ticket\t$90\n Group ticket\t$22.50\n"
+one_day_prices = "One-day ticket prices:\n Adult\t$", one_day_adult_price,"\n Child\t$", one_day_child_price,"\n Senior\t$", one_day_senior_price,"\n Family ticket\t$", one_day_family_price,"\n Group ticket\t$", one_day_group_price,"\n"
+two_day_prices = "Two-day ticket prices:\n Adult\t$", two_day_adult_price,"\n Child\t$", two_day_child_price,"\n Senior\t$", two_day_senior_price,"\n Family ticket\t$", two_day_family_price,"\n Group ticket\t$", two_day_group_price,"\n"
 extra_attractions = "Extra attraction prices:\n Lion feeding\t$2.50\n Penguin feeding\t$2\n Evening barbecue\t$5\n"
 
 # printing the prices and dates
