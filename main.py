@@ -71,7 +71,7 @@ while True: # iterating for multiple customers
     while True: #validating the input of the number of tickets
         try:
             adult_tickets = int(input("Enter the number of adult tickets."))
-        except:
+        except: # no need for specific exception
             adult_tickets = -1
         while True:
             try:
