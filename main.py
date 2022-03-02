@@ -28,8 +28,8 @@ family_ticket_choice = 'n'
 group_ticket_choice = 'n'
 
 # Ticket prices to be shown saved as a string
-one_day_prices = "One-day ticket prices:\n Adult\t$", one_day_adult_price,"\n Child\t$", one_day_child_price,"\n Senior\t$", one_day_senior_price,"\n Family ticket\t$", one_day_family_price,"\n Group ticket\t$", one_day_group_price,"\n"
-two_day_prices = "Two-day ticket prices:\n Adult\t$", two_day_adult_price,"\n Child\t$", two_day_child_price,"\n Senior\t$", two_day_senior_price,"\n Family ticket\t$", two_day_family_price,"\n Group ticket\t$", two_day_group_price,"\n"
+one_day_prices = 'One-day ticket prices:\n Adult\t$20\n Child\t$12\n Senior\t$16\n Family ticket\t$60\n Group ticket\t$15\n'
+two_day_prices = "Two-day ticket prices:\n Adult\t$30\n Child\t$18\n Senior\t$24\n Family ticket\t$90\n Group ticket\t$22.5\n"
 extra_attractions = "Extra attraction prices:\n Lion feeding\t$2.50\n Penguin feeding\t$2\n Evening barbecue\t$5\n"
 
 # printing the prices and dates
@@ -44,8 +44,11 @@ for i in range(1, 8):
 # Task 2: Processing bookings
 while True: # iterating for multiple customers
     while True: # validating the input
-        booking_duration = int(input("Is it a one-day booking or two-day booking? Enter 1 or 2."))
-        if booking_duration == 1 or booking_duration == 2:
+        try:
+            booking_duration = input("Is it a one-day booking or two-day booking? Enter 1 or 2.")
+        except:
+            booking_duration = '0'
+        if booking_duration == '1' or booking_duration == '2':
             break
         else:
             print("Enter a valid value.")
@@ -53,36 +56,54 @@ while True: # iterating for multiple customers
     print("Available dates:")
 
     for i in range(1, 8):
-        print("Enter ", i, " for ", datetime.date.today() + datetime.timedelta(days=i))
+        print("Enter", i, "for", datetime.date.today() + datetime.timedelta(days=i),". Decimal numbers will be converted to the closest integer.")
 
     while True: # validating the date choice
-        first_day = int(input()) # the date to be input as a choice of number from 1 to 7.
+        try:
+            first_day = int(input()) # the date to be input as a choice of number from 1 to 7.
+        except:
+            first_day = 100
         if 1 <= first_day <= 7:
             break
         else:
             print("Enter a value from 1 to 7.")
 
     while True: #validating the input of the number of tickets
-        adult_tickets = int(input("Enter the number of adult tickets."))
+        try:
+            adult_tickets = int(input("Enter the number of adult tickets."))
+        except:
+            adult_tickets = -1
         while True:
-            child_tickets = int(input("Enter the number of child tickets."))
+            try:
+                child_tickets = int(input("Enter the number of child tickets."))
+            except:
+                child_tickets = -1
             if child_tickets > adult_tickets * 2: # validating children tickets separately
                 print("One adult cannot take more than 2 children")
             else:
                 break
-        senior_tickets = int(input("Enter the number of senior tickets."))
+        try:
+            senior_tickets = int(input("Enter the number of senior tickets."))
+        except:
+            senior_tickets = -1
         if all(map(lambda value: value >= 0, (adult_tickets, child_tickets, senior_tickets))):
-            adult_n_senior_tickets = adult_tickets + senior_tickets
-            total_tickets = adult_n_senior_tickets + child_tickets
+            adult_n_senior_tickets = adult_tickets + senior_tickets # total of adult and child tickets
+            total_tickets = adult_n_senior_tickets + child_tickets # total tickets taken including adults, seniors and children, but excluding family and group tickets
             break
         else:
             print("You can't enter a negative value.")
 
     while True:
-        lion_feeding_tickets = int(input("Enter the number of tickets requesting lion feeding."))
-        penguin_feeding_tickets = int(input("Enter the number of tickets requesting penguin feeding."))
+        try:
+            lion_feeding_tickets = int(input("Enter the number of tickets requesting lion feeding."))
+            penguin_feeding_tickets = int(input("Enter the number of tickets requesting penguin feeding."))
+        except:
+            lion_feeding_tickets = -1
         if booking_duration == 2:
-            barbecue_tickets = int(input("Enter the number of tickets requesting barbecue."))
+            try:
+                barbecue_tickets = int(input("Enter the number of tickets requesting barbecue."))
+            except:
+                barbecue_tickets = -1
 
         # validating attractions
         if all(map(lambda value: 0 <= value <= total_tickets, (lion_feeding_tickets, penguin_feeding_tickets, barbecue_tickets))):
